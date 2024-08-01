@@ -1,0 +1,18 @@
+{
+    "name": "Chartboost.Logging.Tests.Editor",
+    "rootNamespace": "Chartboost.Logging.Tests.Editor",
+    "references": [
+        "Chartboost.Utilities.Editor"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
