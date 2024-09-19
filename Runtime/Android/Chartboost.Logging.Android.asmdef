@@ -1,0 +1,21 @@
+{
+    "name": "Chartboost.Logging.Android",
+    "rootNamespace": "Chartboost.Logging.Android",
+    "references": [
+        "Chartboost.Logging",
+        "Chartboost.Threading",
+        "Chartboost.Utilities.Android"
+    ],
+    "includePlatforms": [
+        "Android",
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
