@@ -1,0 +1,21 @@
+{
+    "name": "Chartboost.Logging.iOS",
+    "rootNamespace": "Chartboost.Logging.iOS",
+    "references": [
+        "Chartboost.Logging",
+        "Chartboost.Threading",
+        "Chartboost.Utilities.IOS"
+    ],
+    "includePlatforms": [
+        "Editor",
+        "iOS"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

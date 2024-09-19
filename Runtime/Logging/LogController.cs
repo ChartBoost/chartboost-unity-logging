@@ -5,11 +5,31 @@ namespace Chartboost.Logging
 {
     public static class LogController
     {
-        public static LogLevel LoggingLevel { get; set; } = LogLevel.Info;
+        internal static INativeLogger NativeLogger;
+
+        private static LogLevel _logLevel = LogLevel.Info;
+        
+        public static LogLevel LoggingLevel {
+            get
+            {
+                var nativeLogLevel = NativeLogger?.GetLogLevel() ?? _logLevel;
+
+                if (_logLevel != nativeLogLevel)
+                    Log($"LogLevel: {_logLevel} does not match NativeLogLevel: {nativeLogLevel}", LogLevel.Warning);
+                return _logLevel;
+            }
+            set
+            {
+                _logLevel = value;
+                NativeLogger?.SetLogLevel(value);
+            }
+        }
 
         public static bool UseUnityLogger { get; set; } = true;
 
         public static event Action<string, LogLevel> MessageLogged;
+
+        public static event Action<string, LogLevel> WrapperMessageLogged;
 
         public static event Action<string> UnexpectedErrorOccurred;
 
@@ -48,15 +68,24 @@ namespace Chartboost.Logging
                     Debug.Log(message);
                     break;
             }
-            MessageLogged?.Invoke(message.ToString(), logLevel);
+            OnMessageLogged(message.ToString(), logLevel);
         }
 
         public static void LogException(Exception exception)
         {
             // always use Unity logger to Log exceptions
             Debug.LogException(exception);
-            UnexpectedErrorOccurred?.Invoke(exception.Message);
+            OnExceptionLogged(exception.Message);
         }
+
+        internal static void OnMessageLogged(string message, LogLevel logLevel) 
+            => MessageLogged?.Invoke(message, logLevel);
+
+        internal static void OnExceptionLogged(string message) 
+            => UnexpectedErrorOccurred?.Invoke(message);
+        
+        internal static void OnWrapperMessageLogged(string message, LogLevel logLevel) 
+            => WrapperMessageLogged?.Invoke(message, logLevel);
 
         private const string EmptyMessageWarning = "Log messages should not be null or empty strings.";
     }
